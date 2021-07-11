@@ -48,6 +48,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.animalhub.Interface.OnAlertDialogButtonClickListener;
 import com.example.animalhub.R;
 import com.example.animalhub.model.UserModel;
+import com.example.animalhub.ui.MainActivity;
+import com.example.animalhub.ui.auth.LogInActivity;
 import com.example.animalhub.utils.MyUtils;
 import com.example.animalhub.utils.PreferenceHelperDemo;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -666,7 +668,13 @@ public class ProfileFragment extends Fragment implements LocationListener {
     public void logout(){
         FirebaseAuth.getInstance().signOut();
         //startActivity(new Intent(requireActivity(), LoginActivity.class));
+        Intent intent = new Intent(requireContext(), LogInActivity.class);
+
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+
         requireActivity().finish();
+
         //navController.navigate(R.id.action_profileFragment_to_navigation_login_fragment);
 
     }

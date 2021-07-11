@@ -114,6 +114,24 @@
                         app:iconSize="25dp"
                         app:rippleColor="@color/home_scrole_bar_riple1" />
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_bar_btn4"
+                        android:layout_width="130dp"
+                        android:layout_height="60dp"
+                        android:visibility="gone"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginRight="5dp"
+                        android:clickable="true"
+                        android:text="Admin"
+                        android:textAllCaps="false"
+                        app:backgroundTint="#FF5722"
+                        app:cornerRadius="15dp"
+                        app:icon="@drawable/ic_people"
+                        app:iconGravity="start"
+                        app:iconSize="25dp"
+                        app:rippleColor="@color/home_scrole_bar_riple1" />
+
                 </LinearLayout>
             </HorizontalScrollView>
 

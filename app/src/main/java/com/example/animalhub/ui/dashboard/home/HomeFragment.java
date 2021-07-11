@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.animalhub.R;
+import com.example.animalhub.ui.Admin.Admin_Activity;
 import com.example.animalhub.ui.play.Buy_Activity;
 import com.example.animalhub.ui.play.My_Ads_Activity;
 import com.example.animalhub.ui.play.Sell_Activity;
@@ -58,6 +59,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
+import static com.example.animalhub.utils.Constants.ADMIN_EMAIL;
+
 public class HomeFragment extends Fragment   {
 
     private static final String TAG = "HomeFragment";
@@ -78,6 +81,9 @@ public class HomeFragment extends Fragment   {
 
     @BindView(R.id.btn_bar_btn3)
     MaterialButton btn_bar_btn3;
+
+    @BindView(R.id.btn_bar_btn4)
+    MaterialButton btn_bar_btn4;
 
 
     @BindView(R.id.farm)
@@ -164,6 +170,15 @@ public class HomeFragment extends Fragment   {
             }
         });
 
+        btn_bar_btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ini = new Intent(requireContext(), Admin_Activity.class);
+                startActivity(ini);
+
+            }
+        });
+
 
 
         farm.setOnClickListener(new View.OnClickListener() {
@@ -236,16 +251,23 @@ public class HomeFragment extends Fragment   {
             String userid = firebaseUser.getUid();
             Log.e(TAG, "userid: "+userid);
             DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("User");
-            rootRef.child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
+            rootRef.child(userid).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     if (snapshot.exists()) {
 
                         try{
 
-                            if(snapshot.child("isAdmin").exists())
+                            if(snapshot.child("email").exists())
                             {
-                                Log.i(TAG, "Admin profile.");
+                                if(snapshot.child("email").getValue().equals(ADMIN_EMAIL)){
+                                    Log.i(TAG, "Admin profile.");
+                                    btn_bar_btn4.setVisibility(View.VISIBLE);
+                                }else{
+                                    Log.i(TAG, "not Admin profile.");
+                                    btn_bar_btn4.setVisibility(View.GONE);
+                                }
+
 
                             }
 

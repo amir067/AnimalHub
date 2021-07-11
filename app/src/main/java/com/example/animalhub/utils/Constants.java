@@ -12,6 +12,7 @@ public class Constants {
     public static int places_score;
     public static int colors_score;
     public static int statement_score;
+    public static String ADMIN_EMAIL="admin@animalhub.com";
 
 
     public static class DataConstant{
