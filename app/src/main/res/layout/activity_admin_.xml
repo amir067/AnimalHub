@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:openDrawer="start"
+    android:id="@+id/drawer_ac"
+    android:orientation="vertical"
+    >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_top"
+            android:id="@+id/r1">
+            <ToggleButton
+                android:id="@+id/toggleButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="15dp"
+                android:layout_alignParentRight="false"
+                android:background="@drawable/ic_menu"
+                android:text=""
+                android:textOff=""
+                android:textOn=""
+                android:focusable="false">
+            </ToggleButton>
+
+<!--            <ImageButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/log_out"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:layout_marginTop="23dp"-->
+<!--                android:onClick="logOut"/>-->
+            <TextView
+                android:id="@+id/textanimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Admin Panal"
+                android:layout_toRightOf="@+id/toggleButton"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:textSize="35dp"
+                android:textColor="#FFF59B"
+                android:fontFamily="@font/poppins2"/>
+
+        </RelativeLayout>
+    <TextView
+
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins"
+        android:textColor="#A59C9C"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_centerInParent="true"
+        android:padding="10dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/record"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/r1"
+        />
+        </RelativeLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/navDrawer"
+        app:menu="@menu/admi_menue"
+        app:headerLayout="@layout/manuhader"
+        app:itemTextColor="#FFFFFF"
+        app:itemIconTint="#FFF59B"
+        android:theme="@style/ThemeOverlay.AppCompat.navTheme"
+        android:background="@drawable/bg_drawer"
+        android:layout_gravity="start"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

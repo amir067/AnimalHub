@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_home_fragment">
+
+    <fragment
+        android:id="@+id/navigation_home_fragment"
+        android:name="com.example.animalhub.ui.dashboard.home.HomeFragment"
+        tools:layout="@layout/frag_home"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/navigation_information_fragment"
+        android:name="com.example.animalhub.ui.Info.InformationFragment"
+        tools:layout="@layout/activity_food__info_"
+        android:label="InformationFragment" />
+    <fragment
+        android:id="@+id/navigation_profile_fragment"
+        android:name="com.example.animalhub.ui.dashboard.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/navigation_chat_fragment"
+        android:name="com.example.animalhub.Chat.ChatsFragment"
+        tools:layout="@layout/activity_main_chat"
+        android:label="ChatsFragment" />
+
+
+</navigation>

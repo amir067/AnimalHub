@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "975972637570",
+    "project_id": "animalhub-5417e",
+    "storage_bucket": "animalhub-5417e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975972637570:android:1c599a718edf10aedd8d9b",
+        "android_client_info": {
+          "package_name": "com.example.animalhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975972637570-0uvfi8knia50cmamgd5m1k4acqon9dc9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1zp0hfz1441wGJeLCQAKoNFL_URx9Liw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975972637570-0uvfi8knia50cmamgd5m1k4acqon9dc9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

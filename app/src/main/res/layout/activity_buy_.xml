@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.play.Buy_Activity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:background="@drawable/bg_top">
+            <TextView
+                android:id="@+id/textanimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ads"
+                android:layout_toRightOf="@+id/toggleButton"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:textSize="45dp"
+                android:textColor="#FFF59B"
+                android:fontFamily="@font/poppins2"/>
+            <TextView
+                android:id="@+id/textfind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Find Your Desired Animals"
+                android:layout_below="@+id/textanimal"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/poppins"/>
+
+        </RelativeLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/bg_cell"
+            android:drawableRight="@drawable/ic_search"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginTop="150dp"
+            android:fontFamily="@font/poppins"
+            android:textColor="#000000"
+            android:hint="Search Somthing Here..."
+            />
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins"
+        android:textColor="#A59C9C"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_centerInParent="true"
+        android:padding="10dp"/>
+    <GridView
+        android:layout_below="@+id/search"
+        android:id="@+id/record"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="20dp"
+        android:numColumns="2"
+        android:verticalSpacing="10dp"
+        android:layout_marginRight="20dp"
+        android:horizontalSpacing="10dp"
+        android:orientation="vertical"
+        />
+
+
+</RelativeLayout>

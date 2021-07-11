@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".ui.Admin.Ad_Approved_Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/line4">
+
+            <TextView
+                android:id="@+id/textadd"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:textSize="30dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins2"
+                android:textColor="#123"
+                android:layout_marginLeft="30dp"
+                android:text="Ad Approval" />
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:padding="8dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="10dp"
+            android:orientation="vertical"
+            android:background="#E5E5E5"
+            android:layout_below="@id/line4">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgad"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:onClick="showFullImage"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/poppins2"
+                    android:paddingLeft="15dp"
+                    android:textColor="#123"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:textSize="20dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins2"
+                    android:textColor="#123"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="15dp"
+                    android:textColor="#123"
+                    android:textSize="15dp"
+                    android:fontFamily="@font/poppins2"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/alladd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins2"
+            android:textColor="#123"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/cardview"
+            android:text="Posted By" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_marginTop="40dp"
+            android:layout_toRightOf="@+id/alladd"
+            android:layout_below="@+id/cardview"/>
+        <LinearLayout
+            android:id="@+id/aaa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alladd"
+            android:orientation="horizontal"
+            >
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:fontFamily="@font/poppins2"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="15dp"
+                    android:textColor="#123"
+                    android:layout_marginTop="15dp"
+                    android:text="TextView" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/bb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="5dp"
+                        android:textSize="12dp"
+                        android:textColor="#123"
+                        android:fontFamily="@font/poppins2"
+                        android:text="Location:" />
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="5dp"
+                        android:textSize="12dp"
+                        android:textColor="#123"
+                        android:fontFamily="@font/poppins2"
+                        android:text="TextView" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/aa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="5dp"
+                        android:textSize="12dp"
+                        android:textColor="#123"
+                        android:fontFamily="@font/poppins2"
+                        android:text="Contact No:" />
+                    <TextView
+                        android:id="@+id/contact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="15dp"
+                        android:paddingBottom="5dp"
+                        android:textSize="12dp"
+                        android:textColor="#123"
+                        android:fontFamily="@font/poppins2"
+                        android:text="TextView" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <android.widget.Button
+            android:layout_below="@+id/aaa"
+            android:id="@+id/ad_approved"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_btn"
+            android:textSize="25dp"
+            android:fontFamily="@font/poppins"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:text="Approved Ad"
+            android:onClick="approved"
+            />
+
+
+    </RelativeLayout>
+
+</ScrollView>

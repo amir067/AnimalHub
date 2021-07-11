@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.animalhub">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <uses-feature android:name="android.hardware.camera.front" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- Declaring the required permissions -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET,ACCESS_FINE_LOCATION,ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Required to show current location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AnimalHub"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning,LockedOrientationActivity,allowBackup">
+        <activity android:name=".ui.main.Information_Activity"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity android:name=".ui.play.All_User_Activity"></activity>
+        <activity android:name=".ui.play.All_Ads_Activity" />
+        <activity android:name=".OldData.MainActivityOld"></activity>
+        <activity android:name=".ui.auth.SignUp_Activity" />
+        <activity android:name=".ui.play.Sell_Activity" />
+        <activity android:name=".ui.play.My_Ads_Activity" />
+        <activity android:name=".ui.play.Information_Activity" />
+        <activity android:name=".ui.play.Food_Info_Activity" />
+        <activity android:name=".ui.play.FeedBack_Activity" />
+        <activity android:name=".Chat.ChatDetailsActivity" />
+        <activity android:name=".ui.play.Buy_Activity" />
+        <activity android:name=".OldData.HomeActivityOld" />
+        <activity android:name=".ui.Admin.Admin_Activity" />
+        <activity android:name=".ui.play.Add_View_Activity" />
+        <activity android:name=".ui.Admin.Ad_Approved_Activity" />
+        <activity android:name=".Chat.Main_ChatActivity" />
+        <activity android:name=".ui.auth.LogInActivity" />
+        <activity
+            android:name=".ui.main.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppFullScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/HomeActivityThemeNew"
+            android:windowSoftInputMode="adjustPan" />
+    </application>
+
+</manifest>
