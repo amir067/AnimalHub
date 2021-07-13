@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.applozic.mobicomkit.uiwidgets.conversation.ConversationUIService;
+import com.applozic.mobicomkit.uiwidgets.conversation.activity.ConversationActivity;
 import com.example.animalhub.Chat.ChatDetailsActivity;
 import com.example.animalhub.Chat.Friend;
 import com.example.animalhub.R;
@@ -145,6 +147,7 @@ public class Add_View_Activity extends AppCompatActivity {
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startChat(new View(getApplicationContext()));
             }
         });
@@ -214,10 +217,17 @@ public class Add_View_Activity extends AppCompatActivity {
         public void startChat(View view) {
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
 
-            Intent intent = new Intent(getApplicationContext(), ChatDetailsActivity.class);
+            /*Intent intent = new Intent(getApplicationContext(), ChatDetailsActivity.class);
             intent.putExtra("FRIEND", new Friend(Id,Name, Image));
             intent.putExtra("fromHome", true);
+            startActivity(intent);*/
+
+            Intent intent = new Intent(getApplicationContext(), ConversationActivity.class);
+            intent.putExtra(ConversationUIService.USER_ID, Id);
+            intent.putExtra(ConversationUIService.DISPLAY_NAME,  Name); //put it for displaying the title.
+            intent.putExtra(ConversationUIService.TAKE_ORDER,true); //Skip chat list for showing on back press
             startActivity(intent);
+
         } else {
             startActivity(new Intent(getApplicationContext(), LogInActivity.class));
         }

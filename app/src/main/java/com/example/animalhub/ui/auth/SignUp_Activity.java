@@ -88,6 +88,9 @@ public class SignUp_Activity extends AppCompatActivity      {
     @BindView(R.id.phone_ll)
     LinearLayout phone_ll;
 
+    @BindView(R.id.progressBar2)
+    ProgressBar progressBar2;
+
     SignUPChoice signUPChoice = SignUPChoice.EMAIL;
 
 
@@ -468,21 +471,26 @@ public class SignUp_Activity extends AppCompatActivity      {
 
 
     private void doRegisterWithEmail() {
-        progressDialog.show();
+        //progressDialog.show();
+        progressBar2.setVisibility(View.VISIBLE);
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    Toasty.success(getApplicationContext(), "Sign up Success", Toast.LENGTH_SHORT).show();
+                    progressBar2.setVisibility(View.GONE);
                     FirebaseUser user = firebaseAuth.getCurrentUser();
+
                     doUploadUserData(signUPChoice,user);
 
-                    Toast.makeText(getApplicationContext(), "Sign up Success", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
 
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    progressBar2.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "User alredy registed!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -515,7 +523,7 @@ public class SignUp_Activity extends AppCompatActivity      {
         }else if(signUPChoice == SignUPChoice.PHONE){
             Log.e(TAG, "doUploadUserData: else if" );
             register.setEmail("");
-            register.setName("");
+            register.setName(phone2.getText().toString());
             register.setPhone(phone2.getText().toString());
             register.setDelete(false);
             register.setLocation("");
@@ -529,6 +537,7 @@ public class SignUp_Activity extends AppCompatActivity      {
             @Override
             public void onComplete(@NonNull Task task) {
                 Log.e("TAG", "onComplete:put data in db " );
+
 
                 if(task.isSuccessful()){
                     Log.e(TAG, "onComplete: task Successful" );

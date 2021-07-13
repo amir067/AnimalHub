@@ -29,8 +29,18 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.applozic.mobicomkit.Applozic;
+import com.applozic.mobicomkit.api.account.register.RegistrationResponse;
+import com.applozic.mobicomkit.api.account.user.MobiComUserPreference;
+import com.applozic.mobicomkit.api.account.user.User;
+import com.applozic.mobicomkit.listners.AlLoginHandler;
+import com.applozic.mobicomkit.listners.AlLogoutHandler;
+import com.applozic.mobicomkit.listners.AlPushNotificationHandler;
+import com.applozic.mobicomkit.uiwidgets.conversation.activity.ConversationActivity;
 import com.example.animalhub.R;
+import com.example.animalhub.model.UserModel;
 import com.example.animalhub.ui.Admin.Admin_Activity;
+import com.example.animalhub.ui.auth.LogInActivity;
 import com.example.animalhub.ui.play.Buy_Activity;
 import com.example.animalhub.ui.play.My_Ads_Activity;
 import com.example.animalhub.ui.play.Sell_Activity;
@@ -85,6 +95,9 @@ public class HomeFragment extends Fragment   {
     @BindView(R.id.btn_bar_btn4)
     MaterialButton btn_bar_btn4;
 
+    @BindView(R.id.btn_all_chats)
+    MaterialButton btn_all_chats;
+
 
     @BindView(R.id.farm)
     ImageView farm;
@@ -103,6 +116,8 @@ public class HomeFragment extends Fragment   {
 
     @BindView(R.id.jungle)
     ImageView jungle;
+
+    UserModel userModel = new UserModel();
 
 
     @Override
@@ -175,6 +190,16 @@ public class HomeFragment extends Fragment   {
             public void onClick(View v) {
                 Intent ini = new Intent(requireContext(), Admin_Activity.class);
                 startActivity(ini);
+
+            }
+        });
+
+        btn_all_chats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG, "onClick: btn_all_chats" );
+                Intent intent = new Intent(requireContext(), ConversationActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -254,10 +279,13 @@ public class HomeFragment extends Fragment   {
             rootRef.child(userid).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
+                    Log.e(TAG, "onDataChange: ok" );
                     if (snapshot.exists()) {
+                        Log.e(TAG, "onDataChange: data esists" );
 
                         try{
 
+                            userModel = snapshot.getValue(UserModel.class);
                             if(snapshot.child("email").exists())
                             {
                                 if(snapshot.child("email").getValue().equals(ADMIN_EMAIL)){
@@ -269,10 +297,18 @@ public class HomeFragment extends Fragment   {
                                 }
 
 
+                            }else{//phone verified
+
                             }
+
+
+                            Log.e(TAG, "going to register for appolizc " );
+                            doRegistedUserOnAppolic( userModel);
+
 
                         }
                         catch (Exception e){
+                            Log.e(TAG, "onDataChange: parsing error in try block" );
                             Log.e(TAG, "Exception onDataChange: "+e.getLocalizedMessage() );
 
                         }
@@ -283,6 +319,12 @@ public class HomeFragment extends Fragment   {
 
 
                     } else {
+                        Toasty.error(requireContext(),"Your Account removed by admin!",Toast.LENGTH_SHORT).show();
+                        FirebaseAuth.getInstance().signOut();
+                        doLogoutOnApplozic();
+                        startActivity(new Intent(requireContext(), LogInActivity.class));
+                        requireActivity().finish();
+                        Log.e(TAG, "onDataChange: data not exits" );
 
                         // Don't exist! Do something.
                        // Toast.makeText(requireContext(), "Admin check Error ", Toast.LENGTH_SHORT).show();
@@ -302,7 +344,93 @@ public class HomeFragment extends Fragment   {
     }
 
 
+    private void doRegistedUserOnAppolic(UserModel userModel) {
+        Log.e(TAG, "doRegistedUserOnAppolic: called" );
 
+        User user = new User();
+        user.setUserId(userModel.getId()); //userId it can be any unique user identifier
+        user.setDisplayName(userModel.getName()); //displayName is the name of the user which will be shown in chat messages
+        user.setEmail(userModel.getEmail()); //optional
+        user.setAuthenticationTypeId(User.AuthenticationType.APPLOZIC.getValue());  //User.AuthenticationType.APPLOZIC.getValue() for password verification from Applozic server and User.AuthenticationType.CLIENT.getValue() for access Token verification from your server set access token as password
+        user.setPassword(""); //optional, leave it blank for testing purpose, read this if you want to add additional security by verifying password from your server https://www.applozic.com/docs/configuration.html#access-token-url
+
+        if(userModel.getProfileImageUrl() !=null){
+            if(userModel.getProfileImageUrl().equals("default")){
+                user.setImageLink("");//optional,pass your image link
+            }else{
+                user.setImageLink(userModel.getProfileImageUrl());//optional,pass your image link
+            }
+        }else{
+            user.setImageLink("");//optional,pass your image link
+        }
+
+        if (Applozic.isConnected(requireContext())) {
+            Log.e(TAG, "doRegistedUserOnAppolic: user is alredy logged in" );
+
+        }
+
+        {
+            Log.e(TAG, "doRegistedUserOn Appolizc: logging user..." );
+            Applozic.connectUser(requireContext(), user, new AlLoginHandler() {
+                @Override
+                public void onSuccess(RegistrationResponse registrationResponse, Context context) {
+                    // After successful registration with Applozic server the callback will come here
+                    registerForNotification(registrationResponse);
+                    UpdateUserStatusForChats();
+                }
+
+                @Override
+                public void onFailure(RegistrationResponse registrationResponse, Exception exception) {
+                    // If any failure in registration the callback  will come here
+                }
+            });
+        }
+
+
+
+    }
+
+    private void doLogoutOnApplozic() {
+        Log.e(TAG, "doLogoutOnApplozic: " );
+        Applozic.logoutUser(requireContext(), new AlLogoutHandler() {
+            @Override
+            public void onSuccess(Context context) {
+                Log.e(TAG, "onSuccess: doLogoutOnApplozic" );
+            }
+
+
+            @Override
+            public void onFailure(Exception exception) {
+                Log.e(TAG, "onFailure: doLogoutOnApplozic" );
+
+            }
+        });
+
+
+    }
+
+    private void registerForNotification(RegistrationResponse registrationResponse) {
+        if(MobiComUserPreference.getInstance(requireContext()).isRegistered()) {
+
+            Applozic.registerForPushNotification(requireContext(), Applozic.getInstance(requireContext()).getDeviceRegistrationId(), new AlPushNotificationHandler() {//registrationToken
+                @Override
+                public void onSuccess(RegistrationResponse registrationResponse) {
+                    Log.e(TAG, "onSuccess: registerForPushNotification" );
+                }
+
+                @Override
+                public void onFailure(RegistrationResponse registrationResponse, Exception exception) {
+                    Log.e(TAG, "onFailure: registerForPushNotification" );
+                }
+            });
+        }
+
+    }
+
+    private void UpdateUserStatusForChats() {
+        btn_all_chats.setVisibility(View.VISIBLE);
+        Log.e(TAG, "UpdateUserStatusForChats: chat btn showed" );
+    }
 
 
 }

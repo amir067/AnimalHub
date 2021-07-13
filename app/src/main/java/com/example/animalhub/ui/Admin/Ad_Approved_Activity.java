@@ -20,17 +20,27 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
+
 public class Ad_Approved_Activity extends AppCompatActivity {
     ModelAd ad;
     ImageView imgad;
     TextView name,price,detail,title,location,contact;
     Button ad_approved;
     String Name,Image,Id;
+
     DatabaseReference dref;
+
+    @BindView(R.id.ad_approved)
+    Button ad_approvedBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ad__approved_);
+        ButterKnife.bind(this);
         ad_approved = findViewById(R.id.ad_approved);
         imgad = findViewById(R.id.imgad);
         name = findViewById(R.id.name);
@@ -85,6 +95,7 @@ public class Ad_Approved_Activity extends AppCompatActivity {
     public void approved(View view) {
         ad.setApproved(true);
         dref.child("Ads").child(ad.getCategory()).child(ad.getAdId()).setValue(ad);
-        Toast.makeText(this, "Ad Approved Successfully", Toast.LENGTH_SHORT).show();
+        Toasty.success(this, "Ad Approved Successfully", Toast.LENGTH_SHORT).show();
+        ad_approvedBtn.setText("Approved");
     }
 }

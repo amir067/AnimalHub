@@ -43,6 +43,8 @@ import androidx.navigation.Navigation;
 import com.airbnb.lottie.LottieAnimationView;
 
 
+import com.applozic.mobicomkit.Applozic;
+import com.applozic.mobicomkit.listners.AlLogoutHandler;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.animalhub.Interface.OnAlertDialogButtonClickListener;
@@ -228,7 +230,9 @@ public class ProfileFragment extends Fragment implements LocationListener {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                doLogoutOnApplozic();
                 logout();
+
             }
         });
 
@@ -272,6 +276,27 @@ public class ProfileFragment extends Fragment implements LocationListener {
 
         getUserData();
     }
+
+
+    private void doLogoutOnApplozic() {
+        Log.e(TAG, "doLogoutOnApplozic: " );
+        Applozic.logoutUser(requireContext(), new AlLogoutHandler() {
+            @Override
+            public void onSuccess(Context context) {
+                Log.e(TAG, "onSuccess: doLogoutOnApplozic" );
+            }
+
+
+            @Override
+            public void onFailure(Exception exception) {
+                Log.e(TAG, "onFailure: doLogoutOnApplozic" );
+
+            }
+        });
+
+
+    }
+
     private void showDialogToTurnOnLocation() {
         MyUtils.showDialogToTurnOnLocation(requireContext(), new OnAlertDialogButtonClickListener() {
             @Override

@@ -52,5 +52,7 @@
 
 
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAgsrGTRfHzUi_MKdzAWgHvG6k1BsFz2JA</string>
+    <string name="APPLOZIC_APP_ID">1acac840b5bad8fa24e8d02c196a705d1</string>
+    <string name="default_media_location_folder">animalhub</string>
 
 </resources>

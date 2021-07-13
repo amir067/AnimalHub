@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -405,12 +405,11 @@
 
                 <Button
                     android:id="@+id/codeResendBtn"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Resend Code" />
-
+                    android:text="Resend Code"
+                    android:visibility="gone" />
 
 
                 <Button
@@ -423,9 +422,9 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/bt_rounded_corners_red"
+                    android:onClick="SubmitClicked"
                     android:text="Verify Code"
                     android:textAllCaps="false"
-                    android:onClick="SubmitClicked"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:visibility="gone" />
@@ -451,5 +450,14 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
 </FrameLayout>

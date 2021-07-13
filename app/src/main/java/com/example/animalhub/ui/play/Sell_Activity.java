@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +38,11 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.UUID;
 
+import es.dmoral.toasty.Toasty;
+
 public class Sell_Activity extends AppCompatActivity {
+    private static final String TAG = "Sell_Activity";
+
     Button publish,farm,desert,birds,reptile,sea,jungle;
     EditText title,description,price,phone,u_location,address;
     FirebaseDatabase firebaseDatabase;
@@ -244,6 +249,7 @@ public class Sell_Activity extends AppCompatActivity {
         img.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                progressDialog.dismiss();
                 Uri downloadUrl;
                 Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
                 while (!urlTask.isSuccessful()) ;
@@ -275,10 +281,10 @@ public class Sell_Activity extends AppCompatActivity {
 //                    modelAd.setSubCategory(subcategory.getSelectedItem().toString());
                     databaseReference.child(modelAd.getAdId()).setValue(modelAd);
 
-
-                    Toast.makeText(getApplicationContext(), "Your Ad is Successfully Posted", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getApplicationContext(), HomeActivityOld.class);
-                    startActivity(i);
+                    Log.e(TAG, "onSuccess: ");
+                    Toasty.success(getApplicationContext(), "Your Ad is Successfully Posted for approval", Toast.LENGTH_SHORT).show();
+                    /*Intent i = new Intent(getApplicationContext(), HomeActivityOld.class);
+                    startActivity(i);*/
                     finish();
 
 

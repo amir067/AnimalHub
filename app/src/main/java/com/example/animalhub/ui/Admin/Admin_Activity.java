@@ -122,6 +122,7 @@ public class Admin_Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 adsList=new ArrayList<>();
                 for (DataSnapshot categ:snapshot.getChildren()){
+
                     for (DataSnapshot ads:categ.getChildren()){
                         ModelAd ad=new ModelAd();
                         ad = ads.getValue(ModelAd.class);
@@ -163,6 +164,8 @@ public class Admin_Activity extends AppCompatActivity {
     public void logOut(View view) {
         FirebaseAuth.getInstance().signOut();
         Intent i = new Intent(getApplicationContext(), LogInActivity.class);
+
+
         startActivity(i);
         finish();
     }
